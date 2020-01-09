@@ -1,0 +1,3 @@
+/Users/knrz/Git/uwaterloo/223-algorithms/practice-1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/knrz/Git/uwaterloo/223-algorithms/practice-1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/knrz/Git/uwaterloo/223-algorithms/practice-1/cmake-build-debug/CMakeFiles/practice_1.dir
