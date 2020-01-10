@@ -1,4 +1,5 @@
 #include <iostream>
+#include <utility>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -14,28 +15,19 @@ public:
     const string artist_name;
     unsigned int year;
 
-    Music() {
-        music_id = "";
-        artist_name = "";
-        year = 0;
-    };
+    Music() : music_id(""), artist_name(""), year(0) {};
 
-    Music(string _music_id, string _artist_name, unsigned int _year) {
-        music_id = _music_id;
-        artist_name = _artist_name;
-        year = _year;
-    };
+    Music(string _music_id, string _artist_name, unsigned int _year) :
+            music_id(std::move(_music_id)),
+            artist_name(std::move(_artist_name)),
+            year(_year) {};
 
     string get_artist() {
         return artist_name;
     };
 
     bool operator==(Music &m) {
-        bool is_equal = true;
-        is_equal = is_equal && (m.music_id == music_id);
-        is_equal = is_equal && (m.artist_name == artist_name);
-        is_equal = is_equal && (m.year == year);
-        return is_equal;
+        return (m.music_id == music_id && m.artist_name == artist_name && m.year == year);
     };
 };
 
@@ -45,28 +37,26 @@ public:
     const string name;
     unsigned int duration;
 
-    Song() {
-        genre = "";
-        name = "";
-        duration = 0;
-    };
+    Song() : Music(), name(""), genre(""), duration(0) {};
 
-    Song(string _genre, string _name, unsigned int _duration) {
-        genre = _genre;
-        name = _name;
-        duration = _duration;
-    };
+    Song(string _music_id,
+         string _artist_name,
+         unsigned int _year,
+         string _name,
+         string _genre,
+         unsigned int _duration) :
+            Music(_music_id, _artist_name, _year),
+            name(std::move(_name)),
+            genre(std::move(_genre)),
+            duration(_duration) {};
 
     bool operator==(Song &s) {
-        Music music = static_cast<Music>(this);
-        bool is_equal = true;
-        is_equal = is_equal && (s.genre == genre);
-        is_equal = is_equal && (s.name == name);
-        is_equal = is_equal && (s.duration = duration);
-        is_equal = is_equal && (music.music_id == music_id);
-        is_equal = is_equal && (music.artist_name == artist_name);
-        is_equal = is_equal && (music.year == year);
-        return is_equal;
+        return (s.year == year &&
+                s.duration == duration &&
+                s.music_id == music_id &&
+                s.artist_name == artist_name &&
+                s.name == name &&
+                s.genre == genre);
     };
 };
 
