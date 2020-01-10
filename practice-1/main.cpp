@@ -10,37 +10,63 @@ using namespace std;
 
 class Music {
 public:
-    const string id;
+    const string music_id;
     const string artist_name;
     unsigned int year;
 
-    Music() : id(""), artist_name(""), year(0) {};
+    Music() {
+        music_id = "";
+        artist_name = "";
+        year = 0;
+    };
 
-    Music(string _id, string _artist, unsigned int _year) : id(_id), artist_name(_artist), year(_year) {};
+    Music(string _music_id, string _artist_name, unsigned int _year) {
+        music_id = _music_id;
+        artist_name = _artist_name;
+        year = _year;
+    };
 
     string get_artist() {
         return artist_name;
     };
 
     bool operator==(Music &m) {
-        return m.id == id;
+        bool is_equal = true;
+        is_equal = is_equal && (m.music_id == music_id);
+        is_equal = is_equal && (m.artist_name == artist_name);
+        is_equal = is_equal && (m.year == year);
+        return is_equal;
     };
 };
 
-// requires: genre, song name, song length (unsigned int)
 class Song : public Music {
 public:
     const string genre;
     const string name;
     unsigned int duration;
 
-    Song() : genre(""), name(""), duration(0) {
+    Song() {
+        genre = "";
+        name = "";
+        duration = 0;
     };
 
-    Song(string _genre, string _name, unsigned int _duration) : genre(_genre), name(_name), duration(_duration) {};
+    Song(string _genre, string _name, unsigned int _duration) {
+        genre = _genre;
+        name = _name;
+        duration = _duration;
+    };
 
     bool operator==(Song &s) {
-        return s.id == id;
+        Music music = static_cast<Music>(this);
+        bool is_equal = true;
+        is_equal = is_equal && (s.genre == genre);
+        is_equal = is_equal && (s.name == name);
+        is_equal = is_equal && (s.duration = duration);
+        is_equal = is_equal && (music.music_id == music_id);
+        is_equal = is_equal && (music.artist_name == artist_name);
+        is_equal = is_equal && (music.year == year);
+        return is_equal;
     };
 };
 
@@ -69,6 +95,7 @@ public:
             if (s == song) {
                 return false;
             }
+
             if (s.artist_name == song.artist_name) {
                 songs_by_this_artist += 1;
                 if (songs_by_this_artist == MAX_SONGS_PER_ARTIST_IN_PLAYLIST) {
