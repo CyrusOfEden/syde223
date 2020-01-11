@@ -46,9 +46,9 @@ public:
          string _genre,
          unsigned int _duration) :
             Music(_music_id, _artist_name, _year),
-            name(std::move(_name)),
-            genre(std::move(_genre)),
-            duration(_duration) {};
+    name(std::move(_name)),
+    genre(std::move(_genre)),
+    duration(_duration) {};
 
     bool operator==(Song &s) {
         return (s.year == year &&
@@ -73,6 +73,7 @@ public:
     friend Playlist operator+(Playlist &p1, Playlist &p2);
 
     Playlist shuffle_songs() {
+
         auto shuffled_tracks = vector(tracks);
         auto rng = default_random_engine{0};
         shuffle(begin(shuffled_tracks), end(shuffled_tracks), rng);
@@ -87,7 +88,7 @@ public:
             }
 
             if (s.artist_name == song.artist_name) {
-                songs_by_this_artist += 1;
+                songs_by_this_artist++;
                 if (songs_by_this_artist == MAX_SONGS_PER_ARTIST_IN_PLAYLIST) {
                     return false;
                 }
@@ -99,12 +100,15 @@ public:
 };
 
 Playlist operator+(Playlist &p1, Playlist &p2) {
-    auto tracks = vector(p1.tracks);
-    tracks.insert(tracks.end(), p2.tracks.begin(), p2.tracks.end());
-    return Playlist(tracks);
+        auto tracks = vector(p1.tracks);
+        tracks.insert(tracks.end(), p2.tracks.begin(), p2.tracks.end());
+        return Playlist(tracks);
 };
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+
+
+
+
+
 }
