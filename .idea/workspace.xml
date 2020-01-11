@@ -12,34 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68dc54ce-4211-4faf-95e9-e5a794dc20ea" name="Default Changelist" comment="Added comparisons">
-      <change beforePath="$PROJECT_DIR$/practice-1/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/3.15.3/CMakeCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/3.15.3/CMakeCXXCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/3.15.3/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/3.15.3/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/3.15.3/CMakeSystem.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/3.15.3/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/3.15.3/CompilerIdC/a.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/3.15.3/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/3.15.3/CompilerIdCXX/a.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/practice_1.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/practice_1.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/practice_1.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/practice_1.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/practice_1.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/practice_1.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/practice_1.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/practice_1.dir/depend.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/practice_1.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/practice_1.dir/flags.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/practice_1.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/CMakeFiles/practice_1.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/cmake_install.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/cmake-build-debug/practice_1.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/cmake-build-debug/practice_1.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/practice-1/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/practice-1/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/practice-1/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -96,8 +69,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/practice-1/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="50" selection-end-column="27" />
+            <state relative-caret-position="215">
+              <caret line="57" column="33" lean-forward="true" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -248,7 +221,7 @@
       <workItem from="1578598726614" duration="6841000" />
       <workItem from="1578673351706" duration="176000" />
       <workItem from="1578673564593" duration="7551000" />
-      <workItem from="1578770053543" duration="10474000" />
+      <workItem from="1578770053543" duration="11018000" />
     </task>
     <task id="LOCAL-00001" summary="Inherited Music to Song, created constructors.">
       <created>1578602977185</created>
@@ -268,7 +241,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25042000" />
+    <option name="totallyTimeSpent" value="25586000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -281,7 +254,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1127" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11821086" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -294,7 +266,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32920355" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32920355" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32850242" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.3283186" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.35929203" />
@@ -363,8 +335,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/practice-1/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="50" selection-end-column="27" />
+        <state relative-caret-position="215">
+          <caret line="57" column="33" lean-forward="true" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
