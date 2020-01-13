@@ -8,53 +8,56 @@
 using namespace std;
 
 class Music {
-public:
-    const string music_id;
-    const string artist_name;
+    string music_id;
+    string artist_name;
     unsigned int year;
 
-    Music() : music_id(""), artist_name(""), year(0) {};
+public:
 
-    Music(string _music_id, string _artist_name, unsigned int _year) :
-            music_id(std::move(_music_id)),
-            artist_name(std::move(_artist_name)),
-            year(_year) {};
+    Music() : music_id(""), artist_name(""), year(0) {}
 
-    string get_artist() {
+    Music(string new_music_id, string new_artist_name, unsigned int new_year)
+            : music_id(new_music_id), artist_name(new_artist_name), year(new_year) {}
+
+    string get_music_id() {
+        return music_id;
+    }
+
+    string get_artist_name() {
         return artist_name;
-    };
+    }
 
-    bool operator==(Music &m) {
+    unsigned int get_year() {
+        return year;
+    }
+
+    bool operator==(const Music &m) {
         bool equal = true;
         equal = equal && (m.music_id == music_id);
         equal = equal && (m.artist_name == artist_name);
         equal = equal && (m.year == year);
         return equal;
-    };
+    }
 };
 
 class Song : public Music {
-public:
-    const string name;
-    const string genre;
+    string name;
+    string genre;
     unsigned int duration;
 
-    Song() : Music(), name(""), genre(""), duration(0) {};
+public:
 
-    Song(string _music_id, string _artist_name, unsigned int _year, string _name, string _genre, unsigned int _duration)
-            :
-            Music(_music_id, _artist_name, _year), name(std::move(_name)), genre(std::move(_genre)),
-            duration(_duration) {};
+    Song() : Music(), name(""), genre(""), duration(0) {}
+
+    Song(Music new_music, string new_name, string new_genre, unsigned int new_duration)
+            : Music(new_music), name(new_name), genre(new_genre), duration(new_duration) {}
 
     bool operator==(Song &s) {
-        Music music = static_cast<Music>(*this);
         bool equal = true;
         equal = equal && (s.genre == genre);
         equal = equal && (s.name == name);
-        equal = equal && (s.duration = duration);
-        equal = equal && (music.music_id == music_id);
-        equal = equal && (music.artist_name == artist_name);
-        equal = equal && (music.year == year);
+        equal = equal && (s.duration == duration);
+        equal = equal && static_cast<Music>(*this) == static_cast<Music>(s);
         return equal;
     };
 };
@@ -65,6 +68,7 @@ class Playlist {
     vector<Song> my_playlist;
 
 public:
+
     bool insert_song(Song &song) {
         int songs_by_this_artist = 0;
         for (Song s : my_playlist) {
@@ -72,7 +76,7 @@ public:
                 return false;
             }
 
-            if (s.artist_name == song.artist_name) {
+            if (s.get_artist_name() == song.get_artist_name()) {
                 songs_by_this_artist++;
                 if (songs_by_this_artist == max_playlist_songs) {
                     return false;
@@ -116,9 +120,10 @@ Playlist operator+(Playlist &p1, Playlist &p2) {
 
 int main() {
 
-    Music music_test1 = Music("testId", "Drake", 2020);
-    Song song_test1 = Song("testId", "Drake", 2020, "Forever", "Rap", 5);
-
+    // Music music_test1 = Music("testId", "Drake", 2020);
+    // Song song_test1 = Song(music_test1, "Forever", "Rap", 5);
 }
+
+
 
 
