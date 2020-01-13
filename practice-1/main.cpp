@@ -1,8 +1,6 @@
 #include <iostream>
-#include <utility>
 #include <vector>
 #include <string>
-#include <algorithm>
 #include <ctime>
 #include <cstdlib>
 #include <random>
@@ -10,101 +8,122 @@
 using namespace std;
 
 class Music {
-public:
-    const string music_id;
-    const string artist_name;
+    string music_id;
+    string artist_name;
     unsigned int year;
 
-    Music() : music_id(""), artist_name(""), year(0) {};
+public:
 
-    Music(string _music_id, string _artist_name, unsigned int _year) :
-            music_id(std::move(_music_id)),
-            artist_name(std::move(_artist_name)),
-            year(_year) {};
+    Music() : music_id(""), artist_name(""), year(0) {}
 
-    string get_artist() {
+    Music(string new_music_id, string new_artist_name, unsigned int new_year)
+            : music_id(new_music_id), artist_name(new_artist_name), year(new_year) {}
+
+    string get_music_id() {
+        return music_id;
+    }
+
+    string get_artist_name() {
         return artist_name;
-    };
+    }
 
-    bool operator==(Music &m) {
-        return (m.music_id == music_id && m.artist_name == artist_name && m.year == year);
-    };
+    unsigned int get_year() {
+        return year;
+    }
+
+    bool operator==(const Music &m) {
+        bool equal = true;
+        equal = equal && (m.music_id == music_id);
+        equal = equal && (m.artist_name == artist_name);
+        equal = equal && (m.year == year);
+        return equal;
+    }
 };
 
 class Song : public Music {
-public:
-    const string genre;
-    const string name;
+    string name;
+    string genre;
     unsigned int duration;
 
-    Song() : Music(), name(""), genre(""), duration(0) {};
+public:
 
-    Song(string _music_id,
-         string _artist_name,
-         unsigned int _year,
-         string _name,
-         string _genre,
-         unsigned int _duration) :
-            Music(_music_id, _artist_name, _year),
-            name(std::move(_name)),
-            genre(std::move(_genre)),
-            duration(_duration) {};
+    Song() : Music(), name(""), genre(""), duration(0) {}
+
+    Song(Music new_music, string new_name, string new_genre, unsigned int new_duration)
+            : Music(new_music), name(new_name), genre(new_genre), duration(new_duration) {}
 
     bool operator==(Song &s) {
-        return (s.year == year &&
-                s.duration == duration &&
-                s.music_id == music_id &&
-                s.artist_name == artist_name &&
-                s.name == name &&
-                s.genre == genre);
+        bool equal = true;
+        equal = equal && (s.genre == genre);
+        equal = equal && (s.name == name);
+        equal = equal && (s.duration == duration);
+        equal = equal && static_cast<Music>(*this) == static_cast<Music>(s);
+        return equal;
     };
 };
 
-const int MAX_SONGS_PER_ARTIST_IN_PLAYLIST = 3;
+const int max_playlist_songs = 3;
 
 class Playlist {
+    vector<Song> my_playlist;
+
 public:
-    vector<Song> tracks;
-
-    Playlist() : tracks({}) {};
-
-    explicit Playlist(vector<Song> &_tracks) : tracks(_tracks) {};
-
-    friend Playlist operator+(Playlist &p1, Playlist &p2);
-
-    Playlist shuffle_songs() {
-        auto shuffled_tracks = vector(tracks);
-        auto rng = default_random_engine{0};
-        shuffle(begin(shuffled_tracks), end(shuffled_tracks), rng);
-        return Playlist(shuffled_tracks);
-    }
 
     bool insert_song(Song &song) {
         int songs_by_this_artist = 0;
-        for (Song s : tracks) {
+        for (Song s : my_playlist) {
             if (s == song) {
                 return false;
             }
 
-            if (s.artist_name == song.artist_name) {
-                songs_by_this_artist += 1;
-                if (songs_by_this_artist == MAX_SONGS_PER_ARTIST_IN_PLAYLIST) {
+            if (s.get_artist_name() == song.get_artist_name()) {
+                songs_by_this_artist++;
+                if (songs_by_this_artist == max_playlist_songs) {
                     return false;
                 }
             }
         }
-        tracks.push_back(song);
+        my_playlist.push_back(song);
         return true;
     }
+
+    Playlist shuffle_songs() {
+        Playlist shuffled_playlist;
+
+        vector<Song> copied_playlist(my_playlist);
+
+        srand(time(0));
+        while (copied_playlist.size() > 0) {
+            int index = rand() % copied_playlist.size();
+            shuffled_playlist.my_playlist.push_back(my_playlist.at(index));
+            copied_playlist.erase(copied_playlist.begin() + (index - 1));
+        }
+        return shuffled_playlist;
+    }
+
+    friend Playlist operator+(Playlist &p1, Playlist &p2);
+
 };
 
+// must use p1/p2 because it is a friend function
 Playlist operator+(Playlist &p1, Playlist &p2) {
-    auto tracks = vector(p1.tracks);
-    tracks.insert(tracks.end(), p2.tracks.begin(), p2.tracks.end());
-    return Playlist(tracks);
-};
+    Playlist combined_playlist;
+    combined_playlist.my_playlist = p1.my_playlist;
+
+    for (int i = 0; i < p2.my_playlist.size(); i++) {
+        combined_playlist.my_playlist.push_back(p2.my_playlist.at(i));
+    }
+
+    return combined_playlist;
+}
+
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+
+    // Music music_test1 = Music("testId", "Drake", 2020);
+    // Song song_test1 = Song(music_test1, "Forever", "Rap", 5);
 }
+
+
+
+
