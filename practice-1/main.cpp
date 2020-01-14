@@ -38,6 +38,10 @@ public:
         equal = equal && (m.year == year);
         return equal;
     }
+
+    void print() {
+        cout << "Music ID: " << music_id << " | Artist Name: " << artist_name << " | Year: " << year;
+    }
 };
 
 class Song : public Music {
@@ -60,6 +64,11 @@ public:
         equal = equal && static_cast<Music>(*this) == static_cast<Music>(s);
         return equal;
     };
+
+    void print() {
+        cout << "Name: " << name << " | Genre: " << genre << " | Duration : " << duration << " minutes \n";
+        static_cast<Music>(*this);
+    }
 };
 
 const int max_playlist_songs = 3;
@@ -85,24 +94,33 @@ public:
         }
         my_playlist.push_back(song);
         return true;
+
     }
 
     Playlist shuffle_songs() {
+
         Playlist shuffled_playlist;
 
         vector<Song> copied_playlist(my_playlist);
 
         srand(time(0));
+
         while (copied_playlist.size() > 0) {
             int index = rand() % copied_playlist.size();
-            shuffled_playlist.my_playlist.push_back(my_playlist.at(index));
-            copied_playlist.erase(copied_playlist.begin() + (index - 1));
+            shuffled_playlist.my_playlist.push_back(copied_playlist.at(index));
+            copied_playlist.erase(copied_playlist.begin() + (index));
         }
+
         return shuffled_playlist;
     }
 
-    friend Playlist operator+(Playlist &p1, Playlist &p2);
+    void print() {
+        for (int i = 0; i < my_playlist.size(); i++) {
+            my_playlist.at(i).print();
+        }
+    }
 
+    friend Playlist operator+(Playlist &p1, Playlist &p2);
 };
 
 // must use p1/p2 because it is a friend function
@@ -120,8 +138,33 @@ Playlist operator+(Playlist &p1, Playlist &p2) {
 
 int main() {
 
-    // Music music_test1 = Music("testId", "Drake", 2020);
-    // Song song_test1 = Song(music_test1, "Forever", "Rap", 5);
+    Music music_test1 = Music("testId", "Drake", 2020);
+    Music music_test3 = Music("testId", "Haydn", 2020);
+    Song song_1 = Song(music_test1, "Forever", "Rap", 5);
+    Song song_2 = Song(music_test1, "Long time", "Rap", 5);
+    Song song_3 = Song(music_test1, "Lit", "Rap", 5);
+    Song song_4 = Song(music_test3, "Emotions", "Rap", 5);
+
+    Music music_test2 = Music("testId", "James", 2000);
+    Song forever = Song(music_test2, "Forever", "Rap", 3);
+    Song long_time = Song(music_test2, "Long time", "Rap", 3);
+    Song lit = Song(music_test2, "Lit", "Rap", 3);
+
+    Playlist playlistOne;
+    playlistOne.insert_song(song_1);
+    playlistOne.insert_song(song_2);
+    playlistOne.insert_song(song_3);
+    playlistOne.insert_song(song_4);
+
+    Playlist playlistTwo;
+    playlistTwo.insert_song(forever);
+    playlistTwo.insert_song(long_time);
+    playlistTwo.insert_song(lit);
+
+    playlistOne.print();
+    cout << endl;
+    playlistOne.shuffle_songs().print();
+
 }
 
 
