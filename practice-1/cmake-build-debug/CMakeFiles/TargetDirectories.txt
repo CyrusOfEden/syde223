@@ -1,3 +1,0 @@
-/Users/alexdales/Documents/School/2A/223/Assignment 1/practice-1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/alexdales/Documents/School/2A/223/Assignment 1/practice-1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/alexdales/Documents/School/2A/223/Assignment 1/practice-1/cmake-build-debug/CMakeFiles/practice_1.dir
