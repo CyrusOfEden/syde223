@@ -1,3 +1,15 @@
+// *********************************************************
+//
+// SYDE 223: Practice Assignment 1
+//
+// Group members:
+// Alex Dales - 20770792
+// Kash Nouroozi -
+//
+// Due Date: Friday, Jan 17 at 10:30 AM
+//
+// *********************************************************
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -19,16 +31,8 @@ public:
     Music(string new_music_id, string new_artist_name, unsigned int new_year)
             : music_id(new_music_id), artist_name(new_artist_name), year(new_year) {}
 
-    string get_music_id() {
-        return music_id;
-    }
-
     string get_artist_name() {
         return artist_name;
-    }
-
-    unsigned int get_year() {
-        return year;
     }
 
     bool operator==(const Music &m) {
@@ -92,9 +96,9 @@ public:
                 }
             }
         }
+
         my_playlist.push_back(song);
         return true;
-
     }
 
     Playlist shuffle_songs() {
@@ -137,7 +141,12 @@ Playlist operator+(Playlist &p1, Playlist &p2) {
     return combined_playlist;
 }
 
-
+// INPUT: None
+// PURPOSE: Tests the insert song function:
+// 1. Checks if songs are inserted into the playlist.
+// 2. Checks if the function inserts a duplicate song or not.
+// 3. Checks if the function inserts more than three songs by the same artist
+// OUTPUT: True or false, based on running_tests
 bool test_insert_song() {
 
     bool running_tests = false;
@@ -150,11 +159,12 @@ bool test_insert_song() {
     Song song_4 = Song(music_1, "Poke it out", "Rap", 2);
 
     Playlist playlistOne;
+
     playlistOne.insert_song(song_1);
 
     if (playlistOne.get_song(0) == song_1) {
         running_tests = true;
-//        cout << "Test 1.0: PASSED - Song was inserted successfully. \n";
+        // cout << "Test 1.0: PASSED - Song was inserted successfully. \n";
     } else {
         running_tests = false;
         cout << "Test 1.0: FAILED - Song was not inserted successfully. \n";
@@ -167,7 +177,7 @@ bool test_insert_song() {
         cout << "Test 1.1: FAILED - Song duplicate was inserted. \n";
     } else {
         running_tests = running_tests && true;
-//        cout << "Test 1.1: PASSED - Song duplicate was not inserted. \n";
+        // cout << "Test 1.1: PASSED - Song duplicate was not inserted. \n";
     }
 
     playlistOne.insert_song(song_2);
@@ -183,10 +193,12 @@ bool test_insert_song() {
     }
 
     return running_tests;
-
 }
 
-
+// INPUT: None
+// PURPOSE: Tests the shuffle_playlist function
+// 1. Checks if a playlist's songs are shuffled once the function is called
+// OUTPUT: True or false, based on running_tests
 bool test_shuffle_playlist() {
 
     bool running_tests = false;
@@ -210,6 +222,8 @@ bool test_shuffle_playlist() {
 
     Playlist test_shuffled_playlist = playlistTwo.shuffle_songs();
 
+    // checks every index of the shuffled playlist and compares it to the same index of the non-shuffled playlist
+    // to see if at least one of the index's are different compared to the original playlist, in which case it would have shuffled
     if ((!(test_shuffled_playlist.get_song(0) == playlistTwo.get_song(0))) ||
         (!(test_shuffled_playlist.get_song(1) == playlistTwo.get_song(1))) ||
         (!(test_shuffled_playlist.get_song(2) == playlistTwo.get_song(2))) ||
@@ -222,27 +236,27 @@ bool test_shuffle_playlist() {
     return running_tests;
 }
 
-
-bool run() {
+// INPUT: None
+// PURPOSE: Runs all the test functions and checks if they all pass, then outputs that "All the test functions have passed."
+//          if the if statement is met.
+// OUTPUT: Void
+void run() {
 
     bool tests_passed = false;
 
     test_insert_song();
     test_shuffle_playlist();
 
+    // checks if all the tests have passed
     if (test_shuffle_playlist() == true && test_insert_song() == true) { //insert the two other tests functions
         tests_passed = true;
     }
     if (tests_passed = true) {
         cout << "All the test functions have passed.";
     }
-
-    return 0;
-
 }
 
 int main() {
-
     srand(time(0));
     run();
     return 0;
