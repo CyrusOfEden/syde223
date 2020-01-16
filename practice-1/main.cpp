@@ -103,8 +103,6 @@ public:
 
         vector<Song> copied_playlist(my_playlist);
 
-        srand(time(0));
-
         while (copied_playlist.size() > 0) {
             int index = rand() % copied_playlist.size();
             shuffled_playlist.my_playlist.push_back(copied_playlist.at(index));
@@ -189,50 +187,85 @@ bool test_insert_song() {
 }
 
 
-//bool test_shuffle_playlist() {
-//
-//    bool running_tests = false;
-//
-//    Music music_1 = Music("testId", "Playboi Carti", 2020);
-//
-//    Song song_1 = Song(music_1, "Long time", "Rap", 2);
-//    Song song_2 = Song(music_1, "Shoota", "Rap", 4);
-//    Song song_3 = Song(music_1, "Mileage", "Rap", 5);
-//    Song song_4 = Song(music_1, "Poke it out", "Rap", 2);
-//
-//    Playlist playlistTwo;
-//
-//    playlistOne.insert_song(song_1);
-//
-//    Playlist test_shuffled_playlist = playlistOne.shuffle_songs();
-//
-//    if (test_shuffled_playlist.get_song(1) == playlistOne.get_song(1)) {
-//        return running_tests;
-//
-//    }
-//
-//    return running_tests;
-//
-//
-//    if (test_shuffled_playlist[1] == playlistOne=[1])
-//    return true;
-//}
+bool test_shuffle_playlist() {
+
+    bool running_tests = false;
+
+    Music music_1 = Music("testId", "Mac Miller", 2020);
+    Music music_2 = Music("testId", "Drake", 2017);
+
+    Song song_1 = Song(music_1, "Good News", "Rap", 5);
+    Song song_2 = Song(music_1, "Best Day Ever", "Rap", 2);
+    Song song_3 = Song(music_1, "Nikes on my Feet", "Rap", 4);
+    Song song_4 = Song(music_2, "Now and Forever", "Rap", 3);
+
+    Playlist playlistTwo;
+
+    playlistTwo.insert_song(song_1);
+    playlistTwo.insert_song(song_2);
+    playlistTwo.insert_song(song_3);
+    playlistTwo.insert_song(song_4);
+
+    Playlist shuffled_playlist_test = playlistTwo.shuffle_songs();
+
+    Playlist test_shuffled_playlist = playlistTwo.shuffle_songs();
+
+    if ((!(test_shuffled_playlist.get_song(0) == playlistTwo.get_song(0))) ||
+        (!(test_shuffled_playlist.get_song(1) == playlistTwo.get_song(1))) ||
+        (!(test_shuffled_playlist.get_song(2) == playlistTwo.get_song(2))) ||
+        (!(test_shuffled_playlist.get_song(3) == playlistTwo.get_song(3)))) {
+        running_tests = running_tests && true;
+    } else {
+        running_tests = false;
+    }
+
+    return running_tests;
+}
 
 
 bool run() {
-    test_shuffle_playlist();
-    test_insert_song();
 
-    if (test_shuffle_playlist() == true && test_insert_song() == true) {} //insert the two other tests functions
-    cout << "All the test functions have past";
+    bool tests_passed = false;
+
+    test_insert_song();
+    test_shuffle_playlist();
+
+    if (test_shuffle_playlist() == true && test_insert_song() == true) { //insert the two other tests functions
+        tests_passed = true;
+    }
+    if (tests_passed = true) {
+        cout << "All the test functions have passed.";
+    }
+
+    return 0;
 
 }
 
 int main() {
+
+    srand(time(0));
     run();
     return 0;
 };
 
 
-
+//
+//    Music music_1 = Music("testId", "Mac Miller", 2020);
+//
+//    Song song_1 = Song(music_1, "Good News", "Rap", 5);
+//    Song song_2 = Song(music_1, "Best Day Ever", "Rap", 2);
+//    Song song_3 = Song(music_1, "Nikes on my Feet", "Rap", 4);
+//    Song song_4 = Song(music_1, "Wings", "Rap", 4);
+//
+//    Playlist playlistTwo;
+//
+//    playlistTwo.insert_song(song_1);
+//    playlistTwo.insert_song(song_2);
+//    playlistTwo.insert_song(song_3);
+//    playlistTwo.insert_song(song_4);
+//
+//    Playlist shuffled_playlist_test = playlistTwo.shuffle_songs();
+//
+//    playlistTwo.print();
+//    shuffled_playlist_test.print();
 
