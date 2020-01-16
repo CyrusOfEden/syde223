@@ -233,3 +233,27 @@ int main() {
 
     return 0;
 };
+<<<<<<< Updated upstream
+=======
+
+//    Music music_1 = Music("testId", "Mac Miller", 2020);
+//
+//    Song song_1 = Song(music_1, "Good News", "Rap", 5);
+//    Song song_2 = Song(music_1, "Best Day Ever", "Rap", 2);
+//    Song song_3 = Song(music_1, "Nikes on my Feet", "Rap", 4);
+//    Song song_4 = Song(music_1, "Wings", "Rap", 4);
+//
+//    Playlist playlistTwo;
+//
+//    playlistTwo.insert_song(song_1);
+//    playlistTwo.insert_song(song_2);
+//    playlistTwo.insert_song(song_3);
+//    playlistTwo.insert_song(song_4);
+//    playlistTwo.insert_song(song_1);
+//
+//    Playlist shuffled_playlist_test = playlistTwo.shuffle_songs();
+//
+//    playlistTwo.print();
+//    shuffled_playlist_test.print();
+
+>>>>>>> Stashed changes
