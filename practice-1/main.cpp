@@ -56,7 +56,7 @@ public:
     Song(Music new_music, string new_name, string new_genre, unsigned int new_duration)
             : Music(new_music), name(new_name), genre(new_genre), duration(new_duration) {}
 
-    bool operator==(Song &s) {
+    bool operator==(const Song &s) const {
         bool equal = true;
         equal = equal && (s.genre == genre);
         equal = equal && (s.name == name);
@@ -114,6 +114,10 @@ public:
         return shuffled_playlist;
     }
 
+    Song get_song(int i) {
+        return my_playlist[i];
+    }
+
     void print() {
         for (int i = 0; i < my_playlist.size(); i++) {
             my_playlist.at(i).print();
@@ -123,7 +127,7 @@ public:
     friend Playlist operator+(Playlist &p1, Playlist &p2);
 };
 
-// must use p1/p2 because it is a friend function
+
 Playlist operator+(Playlist &p1, Playlist &p2) {
     Playlist combined_playlist;
     combined_playlist.my_playlist = p1.my_playlist;
@@ -136,36 +140,98 @@ Playlist operator+(Playlist &p1, Playlist &p2) {
 }
 
 
-int main() {
+bool test_insert_song() {
 
-    Music music_test1 = Music("testId", "Drake", 2020);
-    Music music_test3 = Music("testId", "Haydn", 2020);
-    Song song_1 = Song(music_test1, "Forever", "Rap", 5);
-    Song song_2 = Song(music_test1, "Long time", "Rap", 5);
-    Song song_3 = Song(music_test1, "Lit", "Rap", 5);
-    Song song_4 = Song(music_test3, "Emotions", "Rap", 5);
+    bool running_tests = false;
 
-    Music music_test2 = Music("testId", "James", 2000);
-    Song forever = Song(music_test2, "Forever", "Rap", 3);
-    Song long_time = Song(music_test2, "Long time", "Rap", 3);
-    Song lit = Song(music_test2, "Lit", "Rap", 3);
+    Music music_1 = Music("testId", "Playboi Carti", 2020);
+
+    Song song_1 = Song(music_1, "Long time", "Rap", 2);
+    Song song_2 = Song(music_1, "Shoota", "Rap", 4);
+    Song song_3 = Song(music_1, "Mileage", "Rap", 5);
+    Song song_4 = Song(music_1, "Poke it out", "Rap", 2);
 
     Playlist playlistOne;
     playlistOne.insert_song(song_1);
+
+    if (playlistOne.get_song(0) == song_1) {
+        running_tests = true;
+//        cout << "Test 1.0: PASSED - Song was inserted successfully. \n";
+    } else {
+        running_tests = false;
+        cout << "Test 1.0: FAILED - Song was not inserted successfully. \n";
+    }
+
+    playlistOne.insert_song(song_1);
+
+    if (playlistOne.get_song(1) == song_1) {
+        running_tests = false;
+        cout << "Test 1.1: FAILED - Song duplicate was inserted. \n";
+    } else {
+        running_tests = running_tests && true;
+//        cout << "Test 1.1: PASSED - Song duplicate was not inserted. \n";
+    }
+
     playlistOne.insert_song(song_2);
     playlistOne.insert_song(song_3);
     playlistOne.insert_song(song_4);
 
-    Playlist playlistTwo;
-    playlistTwo.insert_song(forever);
-    playlistTwo.insert_song(long_time);
-    playlistTwo.insert_song(lit);
+    if (!(playlistOne.get_song(3) == song_4)) {
+        running_tests = running_tests && true;
+        // cout << "Test 1.2: PASSED - Fourth song by the same artist was not added. \n";
+    } else {
+        running_tests = false;
+        cout << "Test 1.2: FAILED - Fourth song by the same artist was added. \n";
+    }
 
-    playlistOne.print();
-    cout << endl;
-    playlistOne.shuffle_songs().print();
+    return running_tests;
 
 }
+
+
+//bool test_shuffle_playlist() {
+//
+//    bool running_tests = false;
+//
+//    Music music_1 = Music("testId", "Playboi Carti", 2020);
+//
+//    Song song_1 = Song(music_1, "Long time", "Rap", 2);
+//    Song song_2 = Song(music_1, "Shoota", "Rap", 4);
+//    Song song_3 = Song(music_1, "Mileage", "Rap", 5);
+//    Song song_4 = Song(music_1, "Poke it out", "Rap", 2);
+//
+//    Playlist playlistTwo;
+//
+//    playlistOne.insert_song(song_1);
+//
+//    Playlist test_shuffled_playlist = playlistOne.shuffle_songs();
+//
+//    if (test_shuffled_playlist.get_song(1) == playlistOne.get_song(1)) {
+//        return running_tests;
+//
+//    }
+//
+//    return running_tests;
+//
+//
+//    if (test_shuffled_playlist[1] == playlistOne=[1])
+//    return true;
+//}
+
+
+bool run() {
+    test_shuffle_playlist();
+    test_insert_song();
+
+    if (test_shuffle_playlist() == true && test_insert_song() == true) {} //insert the two other tests functions
+    cout << "All the test functions have past";
+
+}
+
+int main() {
+    run();
+    return 0;
+};
 
 
 
