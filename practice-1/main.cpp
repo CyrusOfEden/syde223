@@ -1,3 +1,17 @@
+// *******************************************************
+//
+// SYDE 223: Practice Assignment 1
+//
+// Group 18
+//
+// Group members:
+// Alex Dales - 20770792
+// Kash Nouroozi - 20679984
+//
+// Due Date: Friday, Jan 17 at 10:30 AM
+//
+// *******************************************************
+
 #include <iostream>
 #include <utility>
 #include <vector>
@@ -60,15 +74,15 @@ public:
             : Music(std::move(new_music)), name(std::move(new_name)), genre(std::move(new_genre)),
               duration(new_duration) {}
 
-    string get_name() const {
+    [[nodiscard]] string get_name() const {
         return name;
     }
 
-    string get_genre() const {
+    [[nodiscard]] string get_genre() const {
         return genre;
     }
 
-    unsigned int get_duration() const {
+    [[nodiscard]] unsigned int get_duration() const {
         return duration;
     }
 
@@ -98,7 +112,7 @@ public:
 
     bool insert_song(Song &song) {
         int songs_by_this_artist = 0;
-        for (Song s : tracks) {
+        for (const Song& s : tracks) {
             if (s == song) {
                 return false;
             }
@@ -113,11 +127,11 @@ public:
         return true;
     }
 
-    vector<Song> get_tracks() const {
+    [[nodiscard]] vector<Song> get_tracks() const {
         return tracks;
     }
 
-    Playlist shuffle_songs() const {
+    [[nodiscard]] Playlist shuffle_songs() const {
         vector<Song> shuffled_tracks(tracks);
         const int tracks_count = shuffled_tracks.size();
         for (int i = tracks_count - 1; i > 0; i -= 1) {
