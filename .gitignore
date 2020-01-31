@@ -1,5 +1,4 @@
 **/.DS_Store
-
-practice-1/.idea/*
-
-.idea/*
+**/.idea/*
+**/cmake-build-debug/
+**/CMakeLists.txt
