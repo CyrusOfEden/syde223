@@ -13,6 +13,7 @@ using namespace std;
 
 class Polynomial {
     vector<int> coefficients;
+    friend class PolynomialTest;
 
 public:
     Polynomial();
@@ -32,8 +33,6 @@ public:
     Polynomial operator-(const Polynomial &p) const;
 
     [[nodiscard]] Polynomial derivative() const;
-
-    friend ostream operator<<(ostream &os, const Polynomial &p);
 
     void print() const;
 };
