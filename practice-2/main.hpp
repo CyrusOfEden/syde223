@@ -13,7 +13,10 @@ using namespace std;
 
 class Polynomial {
     vector<int> coefficients;
+
     friend class PolynomialTest;
+
+    void remove_zero_coefficients();
 
 public:
     Polynomial();
@@ -28,9 +31,17 @@ public:
 
     bool operator==(const Polynomial &p2) const;
 
-    Polynomial operator+(const Polynomial &p) const;
+    bool operator!=(const Polynomial &p2) const;
 
-    Polynomial operator-(const Polynomial &p) const;
+    bool operator!=(const vector<int> p2) const;
+
+    bool operator==(const vector<int> p2) const;
+
+    Polynomial operator+(const Polynomial &p2) const;
+
+    Polynomial operator-(const Polynomial &p2) const;
+
+    Polynomial operator*(const Polynomial &p2) const;
 
     [[nodiscard]] Polynomial derivative() const;
 
