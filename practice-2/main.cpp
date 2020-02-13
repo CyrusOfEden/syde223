@@ -124,7 +124,7 @@ Polynomial Polynomial::operator+(const Polynomial &p) const {
 };
 
 Polynomial Polynomial::operator-(const Polynomial &p) const {
-    const int bigger_size = order() < p.order() ? p.order() : order();
+    const int bigger_size = max(order(), p.order());
 
     // Create a new vector for the summed coefficients
     vector<int> summed_coefs(bigger_size, 0);

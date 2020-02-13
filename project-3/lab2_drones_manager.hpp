@@ -10,17 +10,17 @@ protected:
     struct DroneRecord {
     	// CONSTRUCTORS
     	// empty/default constructor
-    	DroneRecord() : prev(NULL), next(NULL), droneID(0), range(0), yearBought(0) {}
+    	DroneRecord() : prev(nullptr), next(nullptr), droneID(0), range(0), yearBought(0) {}
 
     	// droneID-only constructor
-    	DroneRecord(unsigned int newDroneID) : prev(NULL), next(NULL), 
+    	DroneRecord(unsigned int newDroneID) : prev(nullptr), next(nullptr),
 			droneID(newDroneID), range(0), yearBought(0) {}
 			
 		// full parametric constructor
         DroneRecord(unsigned int newDroneID, unsigned int newRange,
 			unsigned int newYearBought, string newDroneType,
 			string newManufacturer, string newDescription, string newBatteryType) :
-				prev(NULL), next(NULL), droneID(newDroneID), range(newRange), 
+				prev(nullptr), next(nullptr), droneID(newDroneID), range(newRange),
 				yearBought(newYearBought), droneType(newDroneType),
 				manufacturer(newManufacturer), description(newDescription), 
 				batteryType(newBatteryType) {}
