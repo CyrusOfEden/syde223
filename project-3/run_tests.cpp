@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include "lab2_drones_manager_test.hpp"
+#include "drones_manager/drones_manager_test.hpp"
 
 using namespace std;
 
@@ -46,5 +46,4 @@ int main() {
 	for (int index = 0; index < 12; ++index) {
     	cout << test_descriptions[index] << endl << get_status_str(test_results[index]) << endl;
 	}
-    system("pause");
 }
