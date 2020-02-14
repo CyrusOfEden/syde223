@@ -34,16 +34,24 @@ public:
 	
 	// PURPOSE: select() and search() work properly
 	bool test3() {
-		DronesManager m;
+        DronesManager m;
+        DronesManager::DroneRecord r2(100);
+        DronesManager::DroneRecord d2(101);
         DronesManager::DroneRecord nullRecord(0);
-		DronesManager::DroneRecord r(100);
 
 	    ASSERT_TRUE(m.select(0) == nullRecord);
-	    m.insert(r, 0);
-	    m.insert(r, 1);
-	    ASSERT_TRUE(m.get_size() == 2);
-	    ASSERT_TRUE(m.select(0) == r);
-	    ASSERT_TRUE(m.select(2) == r);
+
+	    m.insert_back(r2);
+	    m.insert_back(d2);
+	    m.insert_back(r2);
+        m.insert_back(d2);
+
+	    ASSERT_TRUE(m.get_size() == 4);
+	    ASSERT_TRUE(m.select(0) == r2);
+	    ASSERT_TRUE(m.select(m.get_size() + 10) == d2);
+        ASSERT_TRUE(m.search(r2) == 0);
+	    ASSERT_TRUE(m.search(d2) == 1);
+
 	    return true;
 	}
 	
@@ -89,10 +97,10 @@ public:
 		ASSERT_TRUE(m.replace(1, r2));
 		ASSERT_TRUE(m.select(1) == r2);
 
-//		ASSERT_TRUE(m.reverse_list());
-//		ASSERT_TRUE(m.select(0) == c2);
-//		ASSERT_TRUE(m.select(1) == r2);
-//		ASSERT_TRUE(m.select(2) == d2);
+		ASSERT_TRUE(m.reverse_list());
+		ASSERT_TRUE(m.select(0) == c2);
+		ASSERT_TRUE(m.select(1) == r2);
+		ASSERT_TRUE(m.select(2) == d2);
 
 		return true;
 	}
@@ -130,28 +138,105 @@ public:
 	
 	// PURPOSE: try to remove too many elements, then add a few elements
 	bool test8() {
-	    return false;
+	    DronesManager m;
+	    DronesManager::DroneRecord r2(100);
+        DronesManager::DroneRecord d2(200);
+
+        m.insert_back(r2);
+        ASSERT_TRUE(m.remove(0));
+
+        ASSERT_FALSE(m.remove_front());
+        ASSERT_FALSE(m.remove_back());
+        ASSERT_FALSE(m.remove(0));
+
+        ASSERT_TRUE(m.insert_front(r2));
+        ASSERT_TRUE(m.insert_back(d2));
+
+	    return true;
 	}
 	
 	// PURPOSE: lots of inserts and deletes, some of them invalid
 	bool test9() {
-		return false;
-	}    
+        DronesManager m;
+        DronesManager::DroneRecord r2(100);
+        DronesManager::DroneRecord d2(200);
+
+        ASSERT_FALSE(m.remove(0));
+        ASSERT_TRUE(m.insert_back(r2));
+        ASSERT_FALSE(m.insert(d2, 12));
+        ASSERT_FALSE(m.insert(d2, 8));
+
+        ASSERT_TRUE(m.remove(0));
+        ASSERT_FALSE(m.remove(0));
+
+        return true;
+	}
 	    	
 	// PURPOSE: inserts into an unsorted list, then sort the list
 	bool test10() {
-	   return false;
-	}  
+        DronesManagerSorted m;
+        DronesManager::DroneRecord r2d2(100);
+        DronesManager::DroneRecord cpo(200);
+        DronesManager::DroneRecord skywalker(300);
+        DronesManager::DroneRecord vader(400);
+
+        m.insert_front(r2d2);
+        m.insert_front(cpo);
+        m.insert_front(skywalker);
+        m.insert_front(vader);
+
+        m.sort_asc();
+        ASSERT_TRUE(m.is_sorted_asc());
+        ASSERT_FALSE(m.is_sorted_desc());
+
+        m.sort_desc();
+        ASSERT_TRUE(m.is_sorted_desc());
+        ASSERT_FALSE(m.is_sorted_asc());
+
+        return true;
+	}
 	
 	// PURPOSE: insert and remove into sorted manager in ascending order
 	bool test11() {
-	   return false;
+        DronesManagerSorted m;
+        DronesManager::DroneRecord r2d2(100);
+        DronesManager::DroneRecord cpo(200);
+        DronesManager::DroneRecord skywalker(300);
+        DronesManager::DroneRecord vader(400);
+
+        m.insert_sorted_asc(r2d2);
+        m.insert_sorted_asc(cpo);
+        m.insert_sorted_asc(vader);
+        m.insert_sorted_asc(skywalker);
+        m.remove(0);
+
+        ASSERT_TRUE(m.select(0) == r2d2);
+        ASSERT_TRUE(m.select(1) == cpo);
+        ASSERT_TRUE(m.select(2) == vader);
+
+        return true;
 	}
 	
 	// PURPOSE: insert and remove into sorted manager in descending order
 	bool test12() {
-	   return false;
-	}  
+        DronesManagerSorted m;
+        DronesManager::DroneRecord r2d2(100);
+        DronesManager::DroneRecord cpo(200);
+        DronesManager::DroneRecord skywalker(300);
+        DronesManager::DroneRecord vader(400);
+
+        m.insert_sorted_desc(r2d2);
+        m.insert_sorted_desc(cpo);
+        m.insert_sorted_desc(vader);
+        m.insert_sorted_desc(skywalker);
+        m.remove(0);
+
+        ASSERT_TRUE(m.select(0) == skywalker);
+        ASSERT_TRUE(m.select(1) == cpo);
+        ASSERT_TRUE(m.select(2) == r2d2);
+
+        return true;
+	}
 };
 
 #endif

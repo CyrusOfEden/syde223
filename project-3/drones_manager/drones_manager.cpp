@@ -1,4 +1,5 @@
 #include <iostream>
+#include <utility>
 #include <vector>
 #include <algorithm>
 
@@ -6,7 +7,7 @@
 
 using namespace std;
 
-bool operator==(const DronesManager::DroneRecord& lhs, const DronesManager::DroneRecord& rhs) {
+bool operator==(const DronesManager::DroneRecord &lhs, const DronesManager::DroneRecord &rhs) {
     return lhs.droneID == rhs.droneID && lhs.range == rhs.range && lhs.yearBought == rhs.yearBought &&
            lhs.droneType == rhs.droneType && lhs.manufacturer == rhs.manufacturer &&
            lhs.description == rhs.description && lhs.batteryType == rhs.batteryType;
@@ -17,14 +18,14 @@ unsigned int DronesManager::get_size() const {
 }
 
 bool DronesManager::empty() const {
-	return size == 0;
+    return size == 0;
 }
 
-void DronesManager::replace_items(const vector<DroneRecord>& items) {
+void DronesManager::replace_items(const vector<DroneRecord> &items) {
     first = nullptr;
     last = nullptr;
     size = 0;
-    for (const auto& drone : items) {
+    for (const auto &drone : items) {
         insert_back(drone);
     }
 }
@@ -71,13 +72,13 @@ bool DronesManager::insert(DroneRecord value, unsigned int index) {
     if (index > size) {
         return false;
     }
-    if (index == 0) {
-        return insert_front(value);
-    }
     if (index == size) {
         return insert_back(value);
     }
-    DroneRecord *item = new DroneRecord(value);
+    if (index == 0) {
+        return insert_front(value);
+    }
+    auto *item = new DroneRecord(move(value));
     DroneRecord *prev = first;
     DroneRecord *next = prev->next;
     while (index -= 1) {
@@ -93,13 +94,14 @@ bool DronesManager::insert(DroneRecord value, unsigned int index) {
 }
 
 bool DronesManager::insert_front(DroneRecord value) {
-    DroneRecord* item = new DroneRecord(value);
+    auto *item = new DroneRecord(move(value));
     if (empty()) {
         first = item;
         last = item;
         size = 1;
         return true;
     }
+    item->prev = nullptr;
     item->next = first;
     first->prev = item;
     first = item;
@@ -108,13 +110,14 @@ bool DronesManager::insert_front(DroneRecord value) {
 }
 
 bool DronesManager::insert_back(DroneRecord value) {
-    DroneRecord* item = new DroneRecord(value);
+    auto *item = new DroneRecord(move(value));
     if (empty()) {
         first = item;
         last = item;
         size = 1;
         return true;
     }
+    item->next = nullptr;
     item->prev = last;
     last->next = item;
     last = item;
@@ -123,7 +126,7 @@ bool DronesManager::insert_back(DroneRecord value) {
 }
 
 bool DronesManager::remove(unsigned int index) {
-    if (index > size) {
+    if (index >= size) {
         return false;
     }
     auto cursor = first; // the node before the one we want to remove
@@ -172,7 +175,7 @@ bool DronesManager::replace(unsigned int index, DroneRecord value) {
         return false;
     }
 
-    DroneRecord* item = new DroneRecord(std::move(value));
+    auto *item = new DroneRecord(std::move(value));
 
     if (index == 0) {
         item->next = first->next;
@@ -203,20 +206,17 @@ bool DronesManager::replace(unsigned int index, DroneRecord value) {
 }
 
 bool DronesManager::reverse_list() {
-    DroneRecord* current = first;
-    DroneRecord* temp;
-
-    while (current != nullptr) {
-        temp = current->next;
-        current->next = current->prev;
-        current->prev = temp;
-        if (temp == nullptr) {
-            last = first;
-            first = current;
-        } else {
-            current = temp;
-        }
+    if (size < 2) {
+        return true;
     }
+
+    vector<DroneRecord> items;
+    for (auto cursor = first; cursor != nullptr; cursor = cursor->next) {
+        items.push_back(*cursor);
+    }
+
+    reverse(items.begin(), items.end());
+    replace_items(items);
 
     return true;
 }
@@ -248,29 +248,31 @@ bool DronesManagerSorted::is_sorted_desc() const {
 }
 
 bool DronesManagerSorted::insert_sorted_asc(DroneRecord value) {
-    for (auto cursor = first; cursor != nullptr; cursor = cursor->next) {
-        if (value.droneID > cursor->droneID) {
-            DroneRecord* item = new DroneRecord(value);
-            item->prev = cursor;
-            item->next = cursor->next;
-            item->next->prev = item;
-            cursor->next = item;
-        }
+    if (empty() || (size == 1 && value.droneID < first->droneID)) {
+        return insert_front(value);
     }
-    return true;
+
+    auto *item = new DroneRecord(move(value));
+
+    for (auto cursor = first; cursor != nullptr; cursor = cursor->next) {
+        // TODO
+    }
+
+    return false;
 }
 
 bool DronesManagerSorted::insert_sorted_desc(DroneRecord value) {
-    for (auto cursor = first; cursor != nullptr; cursor = cursor->next) {
-        if (value.droneID < cursor->droneID) {
-            DroneRecord* item = new DroneRecord(value);
-            item->prev = cursor;
-            item->next = cursor->next;
-            item->next->prev = item;
-            cursor->next = item;
-        }
+    if (empty() || (size == 1 && value.droneID > first->droneID)) {
+        return insert_front(value);
     }
-    return true;
+
+    auto *item = new DroneRecord(move(value));
+
+    for (auto cursor = first; cursor != nullptr; cursor = cursor->next) {
+        // TODO
+    }
+
+    return false;
 }
 
 void DronesManagerSorted::sort_asc() {
@@ -278,18 +280,18 @@ void DronesManagerSorted::sort_asc() {
     for (auto cursor = first; cursor != nullptr; cursor = cursor->next) {
         drones.push_back(*cursor);
     }
-    sort(drones.begin(), drones.end(), [](DroneRecord a, DroneRecord b) {
+    sort(drones.begin(), drones.end(), [](const DroneRecord& a, const DroneRecord& b) {
         return a.droneID < b.droneID;
     });
     replace_items(drones);
 }
-    
+
 void DronesManagerSorted::sort_desc() {
     vector<DroneRecord> drones;
     for (auto cursor = first; cursor != nullptr; cursor = cursor->next) {
         drones.push_back(*cursor);
     }
-    sort(drones.begin(), drones.end(), [](DroneRecord a, DroneRecord b) {
+    sort(drones.begin(), drones.end(), [](const DroneRecord& a, const DroneRecord& b) {
         return a.droneID > b.droneID;
     });
     replace_items(drones);
