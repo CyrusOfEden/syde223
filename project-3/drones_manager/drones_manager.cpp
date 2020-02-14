@@ -255,7 +255,7 @@ bool DronesManagerSorted::insert_sorted_asc(DroneRecord value) {
     auto *item = new DroneRecord(move(value));
 
     for (auto cursor = first; cursor != nullptr; cursor = cursor->next) {
-        // TODO
+        // TODO: Compare cursor->droneID with item->droneID and splice it in as appropriate
     }
 
     return false;
@@ -269,7 +269,7 @@ bool DronesManagerSorted::insert_sorted_desc(DroneRecord value) {
     auto *item = new DroneRecord(move(value));
 
     for (auto cursor = first; cursor != nullptr; cursor = cursor->next) {
-        // TODO
+        // TODO: Compare cursor->droneID with item->droneID and splice it in as appropriate
     }
 
     return false;
