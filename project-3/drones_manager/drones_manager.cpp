@@ -266,15 +266,18 @@ bool DronesManagerSorted::is_sorted_desc() const {
 }
 
 bool DronesManagerSorted::insert_sorted_asc(DroneRecord value) {
-    if (empty() || (size == 1 && value.droneID < first->droneID)) {
+    if (empty() || value.droneID <= first->droneID) {
         return insert_front(value);
     }
+    if (last->droneID <= value.droneID) {
+        return insert_back(value);
+    }
 
-    int i = 0;
+    unsigned int i = 1;
 
-    for (auto cursor = first; cursor != nullptr; cursor = cursor->next) {
-        if (cursor->droneID < value.droneID) {
-            return insert(value, i);
+    for (auto cursor = first->next; cursor != nullptr; cursor = cursor->next) {
+        if (cursor->droneID > value.droneID) {
+            return insert(value, i - 1);
         }
         i++;
     }
@@ -283,15 +286,18 @@ bool DronesManagerSorted::insert_sorted_asc(DroneRecord value) {
 }
 
 bool DronesManagerSorted::insert_sorted_desc(DroneRecord value) {
-    if (empty() || (size == 1 && value.droneID > first->droneID)) {
+    if (empty() || first->droneID <= value.droneID) {
         return insert_front(value);
     }
+    if (value.droneID <= last->droneID) {
+        return insert_back(value);
+    }
 
-    unsigned int i = 0;
+    unsigned int i = 1;
 
-    for (auto cursor = first; cursor != nullptr; cursor = cursor->next) {
-        if (cursor->droneID > value.droneID) {
-            return insert(value, i - 1);
+    for (auto cursor = first->next; cursor != nullptr; cursor = cursor->next) {
+        if (value.droneID > cursor->droneID) {
+            return insert(value, i);
         }
         i++;
     }
