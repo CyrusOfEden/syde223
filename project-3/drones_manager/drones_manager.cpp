@@ -252,10 +252,13 @@ bool DronesManagerSorted::insert_sorted_asc(DroneRecord value) {
         return insert_front(value);
     }
 
-    auto *item = new DroneRecord(move(value));
+    int i = 0;
 
     for (auto cursor = first; cursor != nullptr; cursor = cursor->next) {
-        // TODO: Compare cursor->droneID with item->droneID and splice it in as appropriate
+        if (cursor->droneID < value.droneID) {
+            return insert(value, i);
+        }
+        i++;
     }
 
     return false;
@@ -266,10 +269,13 @@ bool DronesManagerSorted::insert_sorted_desc(DroneRecord value) {
         return insert_front(value);
     }
 
-    auto *item = new DroneRecord(move(value));
+    unsigned int i = 0;
 
     for (auto cursor = first; cursor != nullptr; cursor = cursor->next) {
-        // TODO: Compare cursor->droneID with item->droneID and splice it in as appropriate
+        if (cursor->droneID > value.droneID) {
+            return insert(value, i - 1);
+        }
+        i++;
     }
 
     return false;
