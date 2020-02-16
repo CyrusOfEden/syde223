@@ -208,6 +208,7 @@ public:
         m.insert_sorted_asc(cpo);
         m.insert_sorted_asc(vader);
         m.insert_sorted_asc(skywalker);
+
         m.remove(0);
 
         ASSERT_TRUE(m.select(0) == r2d2);
@@ -229,6 +230,7 @@ public:
         m.insert_sorted_desc(cpo);
         m.insert_sorted_desc(vader);
         m.insert_sorted_desc(skywalker);
+
         m.remove(0);
 
         ASSERT_TRUE(m.select(0) == skywalker);

@@ -126,14 +126,32 @@ bool DronesManager::insert_back(DroneRecord value) {
 }
 
 bool DronesManager::remove(unsigned int index) {
-    if (index >= size) {
+    if (empty() || index >= size) {
         return false;
     }
+    if (size == 1) {
+        first = nullptr;
+        last = nullptr;
+        size = 0;
+        return true;
+    }
+    if (index == 0) {
+        first = first->next;
+        first->prev = nullptr;
+        size -= 1;
+        return true;
+    }
+    if (index == size - 1) {
+        last = last->prev;
+        last->next = nullptr;
+        return true;
+    }
     auto cursor = first; // the node before the one we want to remove
-    for (int i = 1; i < index; i += 1) {
+    for (int i = 0; i < index; i += 1) {
         cursor = cursor->next;
     }
-    cursor->next = nullptr;
+    cursor->prev->next = cursor->next;
+    cursor->next->prev = cursor->prev;
     size -= 1;
     return true;
 }
