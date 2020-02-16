@@ -276,7 +276,7 @@ bool DronesManagerSorted::insert_sorted_asc(DroneRecord value) {
     unsigned int i = 1;
 
     for (auto cursor = first->next; cursor != nullptr; cursor = cursor->next) {
-        if (cursor->droneID > value.droneID) {
+        if (cursor->droneID < value.droneID) {
             return insert(value, i - 1);
         }
         i++;
