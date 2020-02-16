@@ -280,7 +280,7 @@ void DronesManagerSorted::sort_asc() {
     for (auto cursor = first; cursor != nullptr; cursor = cursor->next) {
         drones.push_back(*cursor);
     }
-    sort(drones.begin(), drones.end(), [](const DroneRecord& a, const DroneRecord& b) {
+    sort(drones.begin(), drones.end(), [](const DroneRecord &a, const DroneRecord &b) {
         return a.droneID < b.droneID;
     });
     replace_items(drones);
@@ -291,7 +291,7 @@ void DronesManagerSorted::sort_desc() {
     for (auto cursor = first; cursor != nullptr; cursor = cursor->next) {
         drones.push_back(*cursor);
     }
-    sort(drones.begin(), drones.end(), [](const DroneRecord& a, const DroneRecord& b) {
+    sort(drones.begin(), drones.end(), [](const DroneRecord &a, const DroneRecord &b) {
         return a.droneID > b.droneID;
     });
     replace_items(drones);
